@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const route = require("./Routes/route");
+const movie = require("./Routes/movie");
 const dbconnect = require("./Mongo/dbconfig");
 const app = express();
 const port = 4000;
@@ -13,6 +14,8 @@ app.use(express.urlencoded({ limit: "50mb", extended: false }))
 app.use(logger("dev"));
 app.use(cors());
 app.use("/api", route);
+app.use("/movie", movie);
+
 
 
 

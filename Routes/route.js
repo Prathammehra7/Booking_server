@@ -14,11 +14,11 @@ route.post("/Signup", async (req, res) => {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
     var hash2 = bcrypt.hashSync(req.body.confirmpassword, salt);
-
+    const letters = /^[a-zA-z]*$/;
 
     const userData = {
         name: req.body.name,
-        email: req.body.email,
+        useremail: req.body.useremail,
         password: hash,
         confirmpassword: hash2
     }
@@ -26,6 +26,15 @@ route.post("/Signup", async (req, res) => {
     if (userData.password !== userData.confirmpassword) {
         return res.status(500).send("Password doesn't match");
     }
+    else if(!userData.name)
+    {
+        return res.status(500).send("Pleace enter the name");
+    }   
+    else if(!userData.name.match(letters))
+    {
+        return res.status(500).send("Username Must Contain only alphabets");
+    }
+    
 
     await User.create(userData);
 
@@ -62,32 +71,46 @@ route.get("/userdata", authFile.authenticationChecker, async (req, res) => {
     return res.send(data);
 })
 
-route.delete("/deleteaccount", async (req, res) => {
-    const id = req.body.id;
-    await User.findByIdAndDelete(id);
+route.delete("/deleteaccount/:usersid", async (req, res) => {
+    const id  = req.params.usersid;
 
+    if(!id)
+    {
+        return res.send("keep eneter the Id")
+    }
+    const userId = await User.findByIdAndDelete(id);
+
+    if(!userId)
+    {
+        return res.status(500).send("User not exist");
+    }
     return res.send("Account Successfully delete");
 })
 
 route.post("/Login", async (req, res) => {
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne({ useremail: req.body.useremail })
 
     if (!user) {
+        console.log("User not found check Email");
         return res.status(500).send("User not found Check Email");
     }
 
     const check = bcrypt.compareSync(req.body.password, user.password); // true
 
     if (!check) {
+        console.log("Password is Wrong");
         return res.status(500).send("Password is Wrong");
     }
 
     const token = authFile.gentoken(user._id);
-
-    return res.send(`Login Successfully ${token}`);
+    console.log("login successfully");
+    return res.send(
+        {token : token}
+        );
 })
 
 
 
 
 module.exports = route;
+

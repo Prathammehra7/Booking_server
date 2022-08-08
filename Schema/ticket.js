@@ -4,29 +4,29 @@ const ticketschema = mongoose.Schema({
     movieName:
     {
         type: String,
-        require: true
+        required: true
     },
     theater:
     {
         type: String,
-        require: true
+        required: true
     },
     movieTime:
     {
         type: String,
-        require: true
+        required: true
     },
     moviePrice:
     {
         type: Number,
-        require: true
+        required: true
     }
 },
     {
         timestamps: true
     });
 
-const ticket = mongoose.model("Booking", ticketschema);
+const Booking = mongoose.model("Booking", ticketschema);
 
-module.exports = ticket;
+module.exports = Booking;
 

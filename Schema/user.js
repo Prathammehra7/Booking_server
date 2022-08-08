@@ -3,17 +3,28 @@ const userschema = new mongoose.Schema({
     name :
     {
         type : String,
-        require : true
+        required: true
+
     },
-    email :
+    useremail :
     {
         type : String,
-        require : true
+        required: true
+
     },
     password : {
         type : String,
-        require : true
-    }
+        required: true
+    },
+    confirmpassword : 
+    {
+        type : String,
+        required : true
+    },
+    moviebooking : 
+        {
+            type : mongoose.Schema.Types.ObjectId
+        }
 },
     
 {
