@@ -4,6 +4,7 @@ const cors = require("cors");
 const route = require("./Routes/route");
 const movie = require("./Routes/movie");
 const dbconnect = require("./Mongo/dbconfig");
+const PORT = process.env.PORT;
 const app = express();
 const port = 4000;
 
