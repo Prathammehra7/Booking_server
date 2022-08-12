@@ -49,6 +49,17 @@ route.post("/moviebooking/:movieid" , authFile.authenticationChecker,async (req,
 
     return res.send(user);
 })
+// route.get("/allmovies",async(req,res)=>
+// {
+//    try {
+//     const data = await params.movieid({});
+//     return res.send(data);
+//    } catch (error) {
+//     console.log(error);
+//     return res.send(error);
+//    }
+// }
+// )
 
 
 module.exports = route;

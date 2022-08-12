@@ -6,7 +6,7 @@ const movie = require("./Routes/movie");
 const dbconnect = require("./Mongo/dbconfig");
 const PORT = process.env.PORT;
 const app = express();
-const port = 4000;
+
 
 dbconnect();
 
@@ -20,11 +20,11 @@ app.use("/movie", movie);
 
 
 
-app.listen(port, (error) => {
+app.listen(PORT, (error) => {
     if (error) {
         console.log(`Server Start fail ${error}`);
     }
     else {
-        console.log(`Server start successfully port is ${port}`);
+        console.log(`Server start successfully port is ${PORT}`);
     }
 })
