@@ -34,8 +34,6 @@ route.post("/Signup", async (req, res) => {
     {
         return res.status(500).send("Username Must Contain only alphabets");
     }
-    
-
     await User.create(userData);
 
     return res.send("SignUp Complete");
