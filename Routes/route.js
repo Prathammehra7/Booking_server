@@ -12,37 +12,43 @@ route.get("/welcome", (req, res) => {
 
 route.post("/Signup", async (req, res) => {
     try {
-
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(req.body.password, salt);
-    var hash2 = bcrypt.hashSync(req.body.confirmpassword, salt);
-    const letters = /^[a-zA-z]*$/;
-
-    const userData = {
-        name: req.body.name,
-        useremail: req.body.useremail,
-        password: hash,
-        confirmpassword: hash2
-    }
-
-    if (userData.password !== userData.confirmpassword) {
-        return res.status(500).send("Password doesn't match");
-    }
-    else if (!userData.name) {
-        return res.status(500).send("Pleace enter the name");
-    }
-    else if (!userData.name.match(letters)) {
-        return res.status(500).send("Username Must Contain only alphabets");
-    }
-    else {
+        var salt = bcrypt.genSaltSync(10);
+        console.log(req.body.password , req.body.confirmpassword);
+        var hash = bcrypt.hashSync(req.body.password, salt);
+        var hash2 = bcrypt.hashSync(req.body.confirmpassword, salt);
+        const letters = /^[a-zA-z]*$/;
+    
+        const userData = {
+            name : req.body.name,
+            useremail : req.body.useremail,
+            password : hash,
+            confirmpassword : hash2
+        }
+    
+        if(userData.password !== userData.confirmpassword)
+        {
+            console.log("Confirm Password and Password is Mismatch");
+            return res.status(500).send("Confirm Password and Password is Mismatch");
+        }
+        else if(!userData.name)
+        {
+            console.log("Pleace enter the name");
+            return res.status(500).send("Pleace enter the name");
+        }   
+        else if(!userData.name.match(letters))
+        {
+            console.log("Username Must Contain only alphabets");
+            return res.status(500).send("Username Must Contain only alphabets");
+        }
+    
         await User.create(userData);
-    }
-    return res.send("SignUp Complete");
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
+    
+        console.log("SignUp Complete");
+        return res.send("SignUp Complete");
+        } catch (error) {
+            console.log(error);
+        }
+    })
 
 route.post("/resetpassword", async (req, res) => {
     const id = req.body.id;
