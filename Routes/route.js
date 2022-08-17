@@ -11,6 +11,8 @@ route.get("/welcome", (req, res) => {
 });
 
 route.post("/Signup", async (req, res) => {
+    try {
+
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
     var hash2 = bcrypt.hashSync(req.body.confirmpassword, salt);
@@ -36,6 +38,10 @@ route.post("/Signup", async (req, res) => {
         await User.create(userData);
     }
     return res.send("SignUp Complete");
+        
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 route.post("/resetpassword", async (req, res) => {
