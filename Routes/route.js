@@ -26,18 +26,15 @@ route.post("/Signup", async (req, res) => {
     if (userData.password !== userData.confirmpassword) {
         return res.status(500).send("Password doesn't match");
     }
-    else if(!userData.name)
-    {
+    else if (!userData.name) {
         return res.status(500).send("Pleace enter the name");
-    }   
-    else if(!userData.name.match(letters))
-    {
+    }
+    else if (!userData.name.match(letters)) {
         return res.status(500).send("Username Must Contain only alphabets");
     }
-    
-
-    await User.create(userData);
-
+    else {
+        await User.create(userData);
+    }
     return res.send("SignUp Complete");
 })
 
@@ -72,16 +69,14 @@ route.get("/userdata", authFile.authenticationChecker, async (req, res) => {
 })
 
 route.delete("/deleteaccount/:usersid", async (req, res) => {
-    const id  = req.params.usersid;
+    const id = req.params.usersid;
 
-    if(!id)
-    {
+    if (!id) {
         return res.send("keep eneter the Id")
     }
     const userId = await User.findByIdAndDelete(id);
 
-    if(!userId)
-    {
+    if (!userId) {
         return res.status(500).send("User not exist");
     }
     return res.send("Account Successfully delete");
@@ -105,8 +100,8 @@ route.post("/Login", async (req, res) => {
     const token = authFile.gentoken(user._id);
     console.log("login successfully");
     return res.send(
-        {token : token}
-        );
+        { token: token }
+    );
 })
 
 
