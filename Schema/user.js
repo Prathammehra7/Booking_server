@@ -12,7 +12,8 @@ const userschema = new mongoose.Schema({
         required: true
 
     },
-    password : {
+    password : 
+    {
         type : String,
         required: true
     },
@@ -22,9 +23,10 @@ const userschema = new mongoose.Schema({
         required : true
     },
     moviebooking : 
-        {
-            type : mongoose.Schema.Types.ObjectId
-        }
+        [{
+            // type : mongoose.Schema.Types.ObjectId,
+            type: String,
+        }],
 },
     
 {

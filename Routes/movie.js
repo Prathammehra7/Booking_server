@@ -33,7 +33,29 @@ route.get("/getMovies", authFile.authenticationChecker ,async (req,res) =>
     return res.send(movies);
 })
 
+route.get("/findmovies/:movieid", async(req,res) => {
+    
+    try {
+        if(!Booking)
+        {
+    
+            return res.status(500).send("Movie not found");
+        }
+        else
+        {
+            const movieid = req.params.movieid;
+        
+            const Movie = await Booking.findById(movieid);
+        
+            return res.send(Movie);
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
 
+});
 route.post("/moviebooking/:movieid" , authFile.authenticationChecker,async (req,res) =>
 {
     const userid = req.body.id;
