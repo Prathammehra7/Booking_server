@@ -25,7 +25,13 @@ const ticketschema = mongoose.Schema({
     {
         type: Number,
         required: true
+    },
+    movieLanguage:
+    {
+        type: Number,
+        required: true
     }
+    
 },
     {
         timestamps: true
