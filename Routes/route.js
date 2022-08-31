@@ -107,6 +107,26 @@ route.post("/Login", async (req, res) => {
         );
 })
 
+route.post("/Moviebook/:movieid", authFile.authenticationChecker, async(req,res) => {
+
+    try {
+        const userid = req.body.id;
+        const movieid = req.params.movieid;
+        console.log(userid,movieid);
+        const updatedUser = await User.findByIdAndUpdate(userid,{
+    
+            $push : {moviebooked : movieid}
+        },
+        {
+            new : true,
+            runValidators : true,
+        });
+        return res.send(updatedUser);        
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 
 

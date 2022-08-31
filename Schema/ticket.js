@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const ticketschema = mongoose.Schema({
+    movieimg:
+    {
+        type: String,
+        required: true
+    },
     movieName:
     {
         type: String,
