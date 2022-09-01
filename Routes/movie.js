@@ -9,7 +9,9 @@ route.post("/moviecreate", authFile.authenticationChecker, async (req, res) => {
         movieName: req.body.movieName,
         theater: req.body.theater,
         movieTime: req.body.movieTime,
-        moviePrice: req.body.moviePrice
+        moviePrice: req.body.moviePrice,
+        movieLanguage: req.body.movieLanguage,
+        movieWatch: req.body.movieWatch
 
     }
 
