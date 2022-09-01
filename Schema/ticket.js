@@ -33,7 +33,7 @@ const ticketschema = mongoose.Schema({
     },
     movieWatch:
     {
-        type: String,
+        type: Number,
         required: true
     }
 },
