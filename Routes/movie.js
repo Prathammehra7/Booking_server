@@ -55,7 +55,7 @@ route.get("/findmovies/:movieid", async (req, res) => {
 
 
 });
-route.get("/moviebooking/:movieid", authFile.authenticationChecker, async (req, res) => {
+route.post("/moviebooking/:movieid", authFile.authenticationChecker, async (req, res) => {
     const userid = req.body.id;
     const movieid = req.params.movieid;
 
